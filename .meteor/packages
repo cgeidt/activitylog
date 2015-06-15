@@ -10,3 +10,9 @@ insecure
 nemo64:bootstrap
 less
 iron:router
+meteorhacks:npm
+
+
+npm-container
+tomi:upload-server
+tomi:upload-jquery

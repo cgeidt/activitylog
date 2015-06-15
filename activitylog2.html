@@ -50,9 +50,7 @@
                     </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <button type="button" class="btn btn-default">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            </button>
+                                <a href="/new"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
                         </li>
                     </ul>
                 </div>
@@ -85,12 +83,17 @@
             <img src="/img/thumb.jpg" alt="Beispielbild">
 
             <div class="caption">
-                <h3>{{name}}</h3>
+                <h3>{{sport}}</h3>
 
-                <p>{{sport}}</p>
+                <p>{{name}}</p>
 
                 <p><a href="#" class="btn btn-primary" role="button">Zur Kategorie</a></p>
             </div>
         </div>
     </div>
+</template>
+
+<template name="newActivity">
+    <h2>Import new activity</h2>
+    {{> upload_bootstrap fileTypes='.tcx' }}
 </template>
