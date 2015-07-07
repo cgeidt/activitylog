@@ -12,11 +12,14 @@ less
 iron:router
 
 
-tomi:upload-server
-tomi:upload-jquery
 meteorhacks:npm
 
 
 npm-container
 accounts-password
 ian:accounts-ui-bootstrap-3
+cfs:standard-packages
+cfs:filesystem
+edgee:slingshot
+tomi:upload-server
+tomi:upload-jquery

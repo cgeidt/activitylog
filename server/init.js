@@ -49,6 +49,7 @@ var parseActivity = function(trainingJSON){
 
 var uploadDir = '/Uploads';
 Meteor.startup(function () {
+    currentUserId = this.userId;
     UploadServer.init({
         checkCreateDirectories: true,
         maxFileSize: 10000000,
@@ -64,6 +65,7 @@ Meteor.startup(function () {
             });
             if(!response.err){
                 var activity = parseActivity(response.result.result.TrainingCenterDatabase.Activities[0].Activity[0]);
+                activity._userId = formFields._userId;
                 Activities.insert(activity);
             }else{
                 console.log(response.err);

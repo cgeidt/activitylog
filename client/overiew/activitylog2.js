@@ -1,11 +1,13 @@
 Activities = new Mongo.Collection("activities");
 
+
 Router.route('/', function () {
 
+    var currentUserId = Meteor.userId();
     this.layout('layout', {
         //set a data context for the whole layout
         data: {
-            activities: Activities.find()
+            activities: Activities.find({_userId: currentUserId})
         }
     });
 
@@ -22,7 +24,16 @@ Template.navi.events({
     }
 });
 
+Template.newActivity.helpers({
+    specificFormData: function() {
+        return {
+            _userId: Meteor.userId()
+        }
+    }
+});
+
 
 Router.route('/activity', function () {
 
 });
+

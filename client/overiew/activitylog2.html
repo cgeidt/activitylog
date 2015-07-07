@@ -14,9 +14,15 @@
                                 data-target="#bs-example-navbar-collapse-1"><span
                                 class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
                                 class="icon-bar"></span><span class="icon-bar"></span></button>
-                        <a id="new" class="navbar-brand" href="/">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                        </a>
+                            {{#if currentUser}}
+                                <a id="new" class="navbar-brand" href="/">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                </a>
+                            {{else}}
+                                <a class="navbar-brand" href="/">
+                                    <img src="/img/running_man.png" width="25px" height="25px">
+                                </a>
+                            {{/if}}
                     </div>
 
                     <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
@@ -37,9 +43,17 @@
 <template name="layout">
     {{> navi}}
     <div class="container">
-    {{> yield}}
-    {{> newActivity}}
+    {{#if currentUser}}
+            {{> yield}}
+            {{> newActivity}}
+    {{else}}
+        <div class="jumbotron">
+            <h1>Welcome!</h1>
+            <p>Here you can store all your activities you tracked with your device. To Use this service you need to be registered and logged in.</p>
+        </div>
+    {{/if}}
     </div>
+
 </template>
 
 <template name="activitylist">
@@ -67,5 +81,6 @@
 
 <template name="newActivity">
     <h2 id="importActivity">Import new activity</h2>
-    {{> upload_bootstrap fileTypes='.tcx' }}
+    {{> upload_bootstrap fileTypes='.tcx' formData=specificFormData}}
+    <script>$('.btn-file').removeAttr('style');</script>
 </template>
