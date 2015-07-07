@@ -22,6 +22,7 @@ Template.navi.events({
     }
 });
 
+
 Router.route('/activity', function () {
 
 });
