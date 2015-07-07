@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "tcxparse": {
+      "version": "1.0.1",
+      "dependencies": {
+        "xml2js": {
+          "version": "0.2.8",
+          "dependencies": {
+            "sax": {
+              "version": "0.5.8"
+            }
+          }
+        },
+        "stdev": {
+          "version": "0.0.1"
+        }
+      }
+    }
+  }
+}
