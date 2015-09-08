@@ -1,19 +1,24 @@
 Activities = new Mongo.Collection("activities");
 
+monthNames = [
+    "January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
+];
+date = new Date();
+stdDate = date.getFullYear() + " " +monthNames[date.getMonth()];
+Session.setDefault('selected-date', stdDate);
+selDate = Session.get('selected-date');
+currentUserId = Meteor.userId();
 
-Router.route('/', function () {
-
-    var currentUserId = Meteor.userId();
-    this.layout('layout', {
-        //set a data context for the whole layout
-        data: {
-            activities: Activities.find({_userId: currentUserId})
-        }
-    });
-
-    // will just get the data context from layout
-    this.render('activitylist');
+Template.activitylist.helpers(
+    {
+        activities: function(){
+            return Activities.find({_userId: currentUserId})
+    }
 });
+
 
 Template.navi.events({
     'click #new':function(e,tmpl) {
@@ -24,6 +29,7 @@ Template.navi.events({
     }
 });
 
+
 Template.newActivity.helpers({
     specificFormData: function() {
         return {
@@ -33,7 +39,42 @@ Template.newActivity.helpers({
 });
 
 
-Router.route('/activity', function () {
+datePickerLogic = function(){
+    if(Meteor.userId()){
+        this.$('#datepicker').show();
+        this.$('#datepicker').datetimepicker({
+            format: 'MMMM YYYY',
+            dayViewHeaderFormat: 'MMMM YYYY',
+            defaultDate: new Date()
+        });
 
+    }else{
+        this.$('#datepicker').hide();
+    }
+}
+
+Template.navi.rendered = function(){
+    datePickerLogic();
+
+}
+
+$(function() {
+    oldDate = "";
+    activities = $( document).find('.activity');
+    console.log(activities);
+    activities.each(function(object){
+        console.log("Test");
+        newDate = object.attr('date');
+        if(oldDate != newDate){
+            $(this).before('<div class="row"><h3>'+newDate+'</h3></div>');
+            oldDate = newDate;
+        }
+    });
 });
+
+
+Meteor.autorun(function(){
+    datePickerLogic();
+});
+
 

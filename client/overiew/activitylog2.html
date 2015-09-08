@@ -3,9 +3,27 @@
 </head>
 
 <body>
-
+    {{>main}}
 </body>
 
+
+<template name="main">
+
+    {{> navi}}
+    <div class="container">
+        {{#if currentUser}}
+            <div id="activitylist">
+                {{> activitylist}}
+            </div>
+            {{> newActivity}}
+        {{else}}
+            <div class="jumbotron">
+                <h1>Welcome!</h1>
+                <p>Here you can store all your activities you tracked with your device. To use this service you need to be registered and logged in.</p>
+            </div>
+        {{/if}}
+    </div>
+</template>
 <template name='navi'>
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
                 <div class="container">
@@ -26,11 +44,14 @@
                     </div>
 
                     <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
-                        <form class="navbar-form navbar-left" role="search">
-                            <div class="form-group">
-                                <input placeholder="search" type="text" class="form-control"/>
-                            </div>
-                        </form>
+                            <form class="navbar-form navbar-left">
+                                <div class="input-group date" id="datepicker">
+                                    <input id="selDate" type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                                </div>
+                            </form>
                         <ul class="nav navbar-nav navbar-right">
                             {{> loginButtons}}
                         </ul>
@@ -40,21 +61,6 @@
 
 </template>
 
-<template name="layout">
-    {{> navi}}
-    <div class="container">
-    {{#if currentUser}}
-            {{> yield}}
-            {{> newActivity}}
-    {{else}}
-        <div class="jumbotron">
-            <h1>Welcome!</h1>
-            <p>Here you can store all your activities you tracked with your device. To Use this service you need to be registered and logged in.</p>
-        </div>
-    {{/if}}
-    </div>
-
-</template>
 
 <template name="activitylist">
     <div class="row">
@@ -65,16 +71,12 @@
 </template>
 
 <template name="activity">
-    <div class="col-sm-2 col-md-2">
+    <div class="col-sm-2 col-md-2 activity" date="{{date}}">
         <div class="thumbnail">
             <div class="caption">
-                <h3>{{sport}}</h3>
-                <p>{{trainingName}}</p>
+                <h4>{{laps.[0].startTime}}</h4>
             </div>
             <img src="/img/running_man.png" width="64px" height="64px">
-            <div class="caption">
-                <p>{{laps.[0].startTime}}</p>
-            </div>
         </div>
     </div>
 </template>

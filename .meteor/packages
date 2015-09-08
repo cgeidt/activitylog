@@ -9,7 +9,6 @@ autopublish
 insecure
 nemo64:bootstrap
 less
-iron:router
 
 
 meteorhacks:npm
@@ -23,3 +22,6 @@ cfs:filesystem
 edgee:slingshot
 tomi:upload-server
 tomi:upload-jquery
+jquery
+underscore
+tsega:bootstrap3-datetimepicker

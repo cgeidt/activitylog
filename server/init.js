@@ -1,6 +1,16 @@
 Activities = new Mongo.Collection("activities");
 
+
+var monthNames = [
+    "January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
+];
+
 var parseActivity = function(trainingJSON){
+
+
     var parseTrack = function(track){
         var trackPoints = [];
         for(var i in track.Trackpoint){
@@ -38,8 +48,13 @@ var parseActivity = function(trainingJSON){
             }
         );
     };
+
+    var date = new Date(laps[0].startTime)
+
     var activity = {
         sport: trainingJSON.$.Sport,
+        date: date.getFullYear() + " " +monthNames[date.getMonth()],
+        weekday: date.getDay(),
         laps:  laps,
         trainingName: trainingJSON.Training[0].Plan[0].Name[0],
         device: trainingJSON.Creator[0].Name[0]
