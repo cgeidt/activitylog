@@ -2,3 +2,19 @@ body {
     padding-top: 70px;
     padding-bottom: 20px;
 }
+
+.weekday{
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.date{
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.glyphicon-size{
+    font-size: 1.5em;
+    bottom: 0px;
+    right: 0px;
+}

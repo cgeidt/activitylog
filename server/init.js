@@ -7,6 +7,10 @@ var monthNames = [
     "August", "September", "October",
     "November", "December"
 ];
+var weekDayNames = [
+    "Monday", "Tuesday", "Wednesday",
+    "Thursday", "Friday", "Saturday", "Sunday"
+];
 
 var parseActivity = function(trainingJSON){
 
@@ -53,8 +57,12 @@ var parseActivity = function(trainingJSON){
 
     var activity = {
         sport: trainingJSON.$.Sport,
-        date: date.getFullYear() + " " +monthNames[date.getMonth()],
-        weekday: date.getDay(),
+        date:  {
+            weekday: weekDayNames[date.getDay()],
+            day: date.getDate(),
+            month: monthNames[date.getMonth()],
+            year: date.getFullYear()
+        },
         laps:  laps,
         trainingName: trainingJSON.Training[0].Plan[0].Name[0],
         device: trainingJSON.Creator[0].Name[0]
