@@ -1,0 +1,33 @@
+<template name="activity-detail">
+    {{> navi}}
+    <div class="container">
+    {{#if currentUser}}
+        <div class="row">
+            <h4>Sports: <small>{{sport}}</small></h4>
+            <h4>Activity name: <small>{{trainingName}}</small></h4>
+            <h4>Date: <small>{{date.weekday}}, {{date.day}}. {{date.month}} {{date.year}}</small></h4>
+            <h4>Device: <small>{{device}}</small></h4>
+        </div>
+        <div class="row">
+            <div class="page-header">
+                <h2>Laps</h2>
+            </div>
+        </div>
+        {{#each laps}}
+            {{> lap}}
+        {{/each}}
+    {{/if}}
+    </div>
+</template>
+
+<template name="lap">
+    <div class="row">
+        <h4>Start time: <small>{{startTime}}</small></h4>
+        <h4>Total time: <small>{{totalTimeSeconds}} seconds</small></h4>
+        <h4>Max. speed: <small>{{maxSpeed}}</small></h4>
+        <h4>Distance: <small>{{distance}}</small></h4>
+        <h4>Avg. heart rate: <small>{{avgHeartRate}}</small></h4>
+        <h4>Max. heart rate: <small>{{maxHeartRate}}</small></h4>
+        <h4>Calories: <small>{{calories}}</small></h4>
+    </div>
+</template>

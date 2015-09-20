@@ -25,3 +25,4 @@ tomi:upload-jquery
 jquery
 underscore
 tsega:bootstrap3-datetimepicker
+iron:router

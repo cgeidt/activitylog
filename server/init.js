@@ -1,17 +1,3 @@
-Activities = new Mongo.Collection("activities");
-
-
-var monthNames = [
-    "January", "February", "March",
-    "April", "May", "June", "July",
-    "August", "September", "October",
-    "November", "December"
-];
-var weekDayNames = [
-    "Monday", "Tuesday", "Wednesday",
-    "Thursday", "Friday", "Saturday", "Sunday"
-];
-
 var parseActivity = function(trainingJSON){
 
 
@@ -72,7 +58,19 @@ var parseActivity = function(trainingJSON){
 
 var uploadDir = '/Uploads';
 Meteor.startup(function () {
-    currentUserId = this.userId;
+    Activities = new Mongo.Collection("activities");
+    var monthNames = [
+        "January", "February", "March",
+        "April", "May", "June", "July",
+        "August", "September", "October",
+        "November", "December"
+    ];
+    var weekDayNames = [
+        "Monday", "Tuesday", "Wednesday",
+        "Thursday", "Friday", "Saturday", "Sunday"
+    ];
+
+    var currentUserId = this.userId;
     UploadServer.init({
         checkCreateDirectories: true,
         maxFileSize: 10000000,
