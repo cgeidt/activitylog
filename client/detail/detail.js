@@ -5,10 +5,21 @@ Router.route('/activity/:_id', function () {
     var labels = [];
     var heartrates = [];
 
+    var amountOfLabels = 10;
+
+    var printLabelEveryNthPoint = parseInt(track.length/amountOfLabels);
+
     for(i = 0; i < track.length; i++){
-        labels.push(i);
+
+        if(i == 0 || printLabelEveryNthPoint % i == 0){
+            labels.push(i);
+        }else{
+            labels.push('');
+        }
+
         heartrates.push(track[i].heartRate);
     }
+
     Template.lap.rendered = function(){
         new Chartist.Line('#chart', {
             labels: labels,
@@ -19,36 +30,20 @@ Router.route('/activity/:_id', function () {
                 }
             ],
             axisX: {
-                type: Chartist.AutoScaleAxis,
-                onlyInteger: true
+                offset: 20,
+                scaleMinSpace:amountOfLabels
+            }
+        },
+        {
+            lineSmooth: Chartist.Interpolation.simple(),
+            showPoint: false,
+            axisX: {
+                offset: 20,
+                scaleMinSpace:amountOfLabels
             }
         });
 
         var $chart = this.$('#chart');
-
-        var $toolTip = $chart
-            .append('<div class="chart-tooltip"></div>')
-            .find('.chart-tooltip')
-            .hide();
-
-
-        $chart.on('mouseenter', '.ct-point', function() {
-            var $point = $(this),
-                value = $point.attr('ct:value'),
-                seriesName = $point.parent().attr('ct:series-name');
-            $toolTip.html(seriesName + '<br>' + value).show();
-        });
-
-        $chart.on('mouseleave', '.ct-point', function() {
-            $toolTip.hide();
-        });
-
-        $chart.on('mousemove', function(event) {
-            $toolTip.css({
-                left: (event.offsetX || event.originalEvent.layerX) - $toolTip.width() / 2 - 10,
-                top: (event.offsetY || event.originalEvent.layerY) - $toolTip.height() - 40
-            });
-        });
 
     };
 
