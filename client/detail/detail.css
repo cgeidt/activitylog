@@ -1,0 +1,6 @@
+.chart-tool-tip{
+    width: 100px;
+    height: 100px;
+    border:2px solid grey;
+    z-index: 999999;
+}

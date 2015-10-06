@@ -1,11 +1,5 @@
 Activities = new Mongo.Collection("activities");
-Router.onBeforeAction(function() {
-    if (! Meteor.userId()) {
-        this.render('login');
-    } else {
-        this.next();
-    }
-});
+var OnBeforeActions;
 
 Router.route('/', function () {
     currentUserId = Meteor.userId();
@@ -47,7 +41,6 @@ Router.route('/', function () {
             });
             $('#datepicker').on("dp.change", function (e) {
                 foundItems = $('div[date="'+e.date._i+'"]');
-                console.log($(foundItems).first());
                 if(foundItems.length){
                     $('html, body').animate({
                         scrollTop: $(foundItems).first().offset().top
