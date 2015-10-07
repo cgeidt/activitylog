@@ -7,7 +7,7 @@ Router.route('/', function () {
     Template.activitylist.helpers(
         {
             activities: function(){
-                return Activities.find({_userId: currentUserId},{sort: {'date.year':-1, 'date.month':-1, 'date.day':-1}, reactive:true})
+                return Activities.find({_userId: currentUserId},{sort: {'date.stamp': -1}, reactive:true})
             }
         });
 

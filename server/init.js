@@ -59,6 +59,7 @@ var parseActivity = function(trainingJSON){
     var activity = {
         sport: trainingJSON.$.Sport,
         date:  {
+            stamp: laps[0].startTime,
             weekday: weekDayNames[date.getDay()],
             day: date.getDate(),
             month: monthNames[date.getMonth()],
