@@ -32,10 +32,10 @@ Router.route('/activity/:_id', function () {
         parseSpeed: function(speed){
             return Math.round(speed) + ' km/h';
         },
-        parseSeconds: function(seconds){
-            var hours = parseInt(seconds/3600);
-            var minutes = parseInt((seconds-(hours*3600))/60);
-            var seconds = parseInt(seconds-(hours*3600)-(minutes*60));
+        parseSeconds: function(sec){
+            var hours = parseInt(sec/3600);
+            var minutes = parseInt((sec-(hours*3600))/60);
+            var seconds = parseInt(sec-(hours*3600)-(minutes*60));
 
             return hours + 'h ' + minutes + 'm ' + seconds +'s';
         },
@@ -52,14 +52,19 @@ Router.route('/activity/:_id', function () {
                 "Thursday", "Friday", "Saturday", "Sunday"
             ];
 
+            var fillWithZeroes = function(value){
+                if (value < 10){
+                    value = '0' + value;
+                }
+                return value;
+            };
             var weekday = weekDayNames[date.getDay()];
             var day = date.getDate();
             var month = monthNames[date.getMonth()];
             var year = date.getFullYear();
-            var hours = date.getHours();
-            var minutes = date.getMinutes();
-            var seconds = date.getSeconds();
-
+            var hours = fillWithZeroes(date.getHours());
+            var minutes = fillWithZeroes(date.getMinutes());
+            var seconds = fillWithZeroes(date.getSeconds());
             return weekday + ', ' + day + ' ' + month +' ' + year + ', ' + hours + ':' + minutes + ':' + seconds;
         },
         md5: function(value){
