@@ -12,16 +12,6 @@ Router.route('/', function () {
         });
 
 
-    Template.navi.events({
-        'click #new':function(e,tmpl) {
-            e.preventDefault();
-            $('html, body').animate({
-                scrollTop: $("#importActivity").offset().top
-            }, 600);
-        }
-    });
-
-
     Template.newActivity.helpers({
         specificFormData: function() {
             return {
