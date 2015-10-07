@@ -1,4 +1,4 @@
-<template name="activity-detail">
+<template name="activitydetail">
     {{> navi}}
     <div class="container">
     {{#if currentUser}}
@@ -20,6 +20,11 @@
         {{#each laps}}
             {{> lap}}
         {{/each}}
+        <div class="row col-md-12">
+            <button id="delete" type="button" class="btn btn-danger" aria-label="Delete">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+            </button>
+        </div>
     {{/if}}
     </div>
 </template>
@@ -27,14 +32,14 @@
 <template name="lap">
     <div class="row">
         <div class="col-md-6">
-            <h4>Start time: <small>{{startTime}}</small></h4>
-            <h4>Total time: <small>{{totalTimeSeconds}} seconds</small></h4>
-            <h4>Max. speed: <small>{{maxSpeed}}</small></h4>
+            <h4>Start time: <small>{{parseDate startTime}}</small></h4>
+            <h4>Total time: <small>{{parseSeconds totalTimeSeconds}}</small></h4>
+            <h4>Max. speed: <small>{{parseSpeed maxSpeed}}</small></h4>
         </div>
         <div class="col-md-6">
-            <h4>Avg. heart rate: <small>{{avgHeartRate}}</small></h4>
-            <h4>Max. heart rate: <small>{{maxHeartRate}}</small></h4>
-            <h4>Calories: <small>{{calories}}</small></h4>
+            <h4>Avg. heart rate: <small>{{avgHeartRate}} bpm</small></h4>
+            <h4>Max. heart rate: <small>{{maxHeartRate}} bpm</small></h4>
+            <h4>Calories: <small>{{calories}} kcal</small></h4>
         </div>
         <div class="col-md-12">
             <div id="chart" class="ct-perfect-fourth"></div>

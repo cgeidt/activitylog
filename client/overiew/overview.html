@@ -2,10 +2,10 @@
         {{> navi}}
         <div class="container">
             {{#if currentUser}}
+                {{> newActivity}}
                 <div id="activitylist">
                     {{> activitylist}}
                 </div>
-                {{> newActivity}}
             {{/if}}
         </div>
 </template>
