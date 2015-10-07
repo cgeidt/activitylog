@@ -27,3 +27,4 @@ tsega:bootstrap3-datetimepicker
 iron:router
 mfpierre:chartist-js
 nemo64:bootstrap
+jparker:crypto-md5

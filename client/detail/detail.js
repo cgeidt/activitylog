@@ -3,29 +3,30 @@ Router.route('/activity/:_id', function () {
     var activity = Activities.findOne({_userId: currentUserId, _id: this.params._id });
 
     Template.lap.rendered = function(){
-        var track = activity.laps[0].track;
-        var labels = [];
-        var heartrates = [];
+        for(i = 0; i < activity.laps.length; i++){
+            var track = activity.laps[i].track;
+            var labels = [];
+            var heartrates = [];
 
-        for(i = 0; i < track.length; i++){
-            labels.push('');
-            heartrates.push(track[i].heartRate);
+            for(j = 0; j < track.length; j++){
+                labels.push('');
+                heartrates.push(track[j].heartRate);
+            }
+            new Chartist.Line('#chart_'+CryptoJS.MD5(activity.laps[i].startTime).toString(), {
+                    labels: labels,
+                    series: [heartrates]
+                },
+                {
+                    lineSmooth: Chartist.Interpolation.simple(),
+                    showPoint: false
+                });
+
+
         }
-        new Chartist.Line('#chart', {
-            labels: labels,
-            series: [heartrates]
-        },
-        {
-            lineSmooth: Chartist.Interpolation.simple(),
-            showPoint: false
-        });
-
-        var $chart = this.$('#chart');
 
     };
 
     this.render('activitydetail', {data: activity});
-
 
     Template.lap.helpers({
         parseSpeed: function(speed){
@@ -60,6 +61,9 @@ Router.route('/activity/:_id', function () {
             var seconds = date.getSeconds();
 
             return weekday + ', ' + day + ' ' + month +' ' + year + ', ' + hours + ':' + minutes + ':' + seconds;
+        },
+        md5: function(value){
+            return CryptoJS.MD5(value).toString();
         }
     });
 
