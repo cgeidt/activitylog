@@ -2,6 +2,7 @@ Router.route('/activity/:_id', function () {
     var currentUserId = Meteor.userId();
     var activity = Activities.findOne({_userId: currentUserId, _id: this.params._id });
 
+    // Erstellen der Diagramme die den Puls repräsentieren
     Template.lap.rendered = function(){
         for(i = 0; i < activity.laps.length; i++){
             var track = activity.laps[i].track;
@@ -12,6 +13,7 @@ Router.route('/activity/:_id', function () {
                 labels.push('');
                 heartrates.push(track[j].heartRate);
             }
+            //um das richtige diegramm zu füllen wird der erzeugte md5-Hash als id verwendet
             new Chartist.Line('#chart_'+CryptoJS.MD5(activity.laps[i].startTime).toString(), {
                     labels: labels,
                     series: [heartrates]
@@ -28,6 +30,7 @@ Router.route('/activity/:_id', function () {
 
     this.render('activitydetail', {data: activity});
 
+    //Helferfunktionen die gespeicherteten Daten zum Anzeigen im Template aufbereiten
     Template.lap.helpers({
         parseSpeed: function(speed){
             return Math.round(speed) + ' km/h';
@@ -67,18 +70,16 @@ Router.route('/activity/:_id', function () {
             var seconds = fillWithZeroes(date.getSeconds());
             return weekday + ', ' + day + ' ' + month +' ' + year + ', ' + hours + ':' + minutes + ':' + seconds;
         },
+        //Diese Funktion gibt einen md5-Hash zurück der als ID für die Diagramme verwendet wird
         md5: function(value){
             return CryptoJS.MD5(value).toString();
         }
     });
 
+    //Funktion ruft das löschen einer Activity auf
     Template.activitydetail.events({
-        'click #delete': function(){
-            var result = confirm("Are you sure you want to delete this activity?");
-            if (result) {
-                Activities.remove(this._id);
-                Router.go('/');
-            }
+        'click #deleteActivity': function(){
+            Meteor.call('deleteActivity', this._id);
         }
     });
 

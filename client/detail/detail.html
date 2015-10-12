@@ -2,6 +2,26 @@
     {{> navi}}
     <div class="container">
     {{#if currentUser}}
+        <div id="modalDeleteActivity" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title">Delete Activity</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this Activity?</p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" id="deleteActivity" data-dismiss="modal">Yes Delete</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-6">
                 <h4>Sports: <small>{{sport}}</small></h4>
@@ -21,7 +41,7 @@
             {{> lap}}
         {{/each}}
         <div class="row col-md-12">
-            <button id="delete" type="button" class="btn btn-danger" aria-label="Delete">
+            <button type="button" class="btn btn-danger delete" aria-label="Delete" data-toggle="modal" data-target="#modalDeleteActivity">
                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
             </button>
         </div>
